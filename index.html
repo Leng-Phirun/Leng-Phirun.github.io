@@ -1,3 +1,842 @@
-Hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leng Phirun | Assistant Lead (Adversary) at Veilron Technologies</title>
+    <link rel="icon" href="5845cd430b2a3b54fdbaecf8.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<div class="tenor-gif-embed" data-postid="14259975201363044523" data-share-method="host" data-aspect-ratio="1.02532" data-width="100%"><a href="https://tenor.com/view/cat-white-white-cat-zesty-cat-freaky-cat-gif-14259975201363044523">Cat White Meme</a>from <a href="https://tenor.com/search/cat-memes">Cat Memes</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --accent-glow: rgba(0, 255, 136, 0.15);
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --border: #222222;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        nav .logo span {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .greeting {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero .title {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .title span {
+            color: var(--accent);
+        }
+
+        .hero .tagline {
+            font-family: 'Courier New', monospace;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent-dim);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h2 span {
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .about-details {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .about-details .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .about-details .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .about-details .detail-label {
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .about-details .detail-value {
+            color: var(--accent);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            color: var(--text-primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Certifications */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cert-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-card .cert-org {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cert-card .cert-status {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cert-status.earned {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .cert-status.in-progress {
+            background: rgba(255, 200, 0, 0.1);
+            color: #ffc800;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .project-card .project-label {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tech span {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* Contact */
+        #contact {
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Terminal cursor blink */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: var(--accent);
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .title {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">~/leng<span>.phirun</span></a>
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certs</a></li>
+            <li><a href="#projects">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="greeting">$ whoami</p>
+        <h1>Leng Phirun</h1>
+        <p class="title"><span>Assistant Lead (Adversary)</span> &amp; Penetration Tester</p>
+        <p class="tagline">An enthusiastic cybersecurity professional with hands-on experience in vulnerability assessment, penetration testing, and red teaming. Passionate about uncovering vulnerabilities and strengthening security measures.<span class="cursor"></span></p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View Experience</a>
+            <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="section-header">
+        <h2><span>#</span> About Me</h2>
+        <div class="line"></div>
+    </div>
+    <div class="about-content">
+        <div class="about-text">
+            <p>I am an Assistant Lead (Adversary) at Veilron Technologies with over 3 years of hands-on experience in the cybersecurity field. My work focuses on vulnerability assessment, penetration testing, and red teaming across networks, web applications, mobile apps, Active Directory, and APIs.</p>
+            <p>I'm passionate about uncovering vulnerabilities and strengthening security measures, with a keen interest in staying updated with the latest industry trends. Known for a proactive attitude, attention to detail, and the ability to collaborate effectively with teams.</p>
+            <p>Outside of work, I enjoy participating in CTF competitions, researching new tools and techniques, and continuously growing within the cybersecurity landscape.</p>
+        </div>
+        <div class="about-details">
+            <div class="detail-item">
+                <span class="detail-label">role</span>
+                <span class="detail-value">Asst. Lead (Adversary)</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">company</span>
+                <span class="detail-value">Veilron Technologies</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">education</span>
+                <span class="detail-value">B.Sc. Computer Science</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">university</span>
+                <span class="detail-value">RUPP</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">location</span>
+                <span class="detail-value">Phnom Penh, Cambodia</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">interests</span>
+                <span class="detail-value">CTFs, Red Teaming</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+    <div class="section-header">
+        <h2><span>#</span> Skills</h2>
+        <div class="line"></div>
+    </div>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h3>// VAPT &amp; Red Teaming</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Network Pentesting</span>
+                <span class="skill-tag">Web App Testing</span>
+                <span class="skill-tag">Mobile App Testing</span>
+                <span class="skill-tag">API Security</span>
+                <span class="skill-tag">Active Directory</span>
+                <span class="skill-tag">Red Teaming</span>
+                <span class="skill-tag">Configuration Review</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Security Operations</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Vulnerability Assessment</span>
+                <span class="skill-tag">SIEM</span>
+                <span class="skill-tag">PAM</span>
+                <span class="skill-tag">Asset Management</span>
+                <span class="skill-tag">IT Policy</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Key Competencies</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Project Management</span>
+                <span class="skill-tag">Team Management</span>
+                <span class="skill-tag">Critical Thinking</span>
+                <span class="skill-tag">Report Writing</span>
+                <span class="skill-tag">Client Presentations</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Methodologies</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">OWASP Top 10</span>
+                <span class="skill-tag">MITRE ATT&amp;CK</span>
+                <span class="skill-tag">PTES</span>
+                <span class="skill-tag">NIST</span>
+                <span class="skill-tag">Kill Chain</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications">
+    <div class="section-header">
+        <h2><span>#</span> Certifications</h2>
+        <div class="line"></div>
+    </div>
+    <div class="certs-grid">
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f6e1;</div>
+            <h3>OSCP</h3>
+            <p class="cert-org">OffSec</p>
+            <span class="cert-status earned">Certified</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f3af;</div>
+            <h3>CRTA</h3>
+            <p class="cert-org">CyberWarFare Labs</p>
+            <span class="cert-status earned">Nov 2025</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f50d;</div>
+            <h3>CREST CRT</h3>
+            <p class="cert-org">CREST</p>
+            <span class="cert-status earned">Aug 2025</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f50d;</div>
+            <h3>CREST CPSA</h3>
+            <p class="cert-org">CREST</p>
+            <span class="cert-status earned">Aug 2025</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f4bb;</div>
+            <h3>PT1 Certificate</h3>
+            <p class="cert-org">TryHackMe</p>
+            <span class="cert-status earned">Jun 2025</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f310;</div>
+            <h3>API Pentesting</h3>
+            <p class="cert-org">APIsec University</p>
+            <span class="cert-status earned">Oct 2024</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f512;</div>
+            <h3>CC</h3>
+            <p class="cert-org">ISC2</p>
+            <span class="cert-status earned">Certified</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f393;</div>
+            <h3>B.Sc. Computer Science</h3>
+            <p class="cert-org">Royal University of Phnom Penh</p>
+            <span class="cert-status earned">Graduated</span>
+        </div>
+    </div>
+</section>
+
+<!-- Experience -->
+<section id="projects">
+    <div class="section-header">
+        <h2><span>#</span> Experience</h2>
+        <div class="line"></div>
+    </div>
+    <div class="projects-grid">
+        <div class="project-card">
+            <p class="project-label">// Mar 2025 - Present</p>
+            <h3>Assistant Lead (Adversary)</h3>
+            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Veilron Technologies (Hybrid)</p>
+            <p>Leading adversary simulation engagements, overseeing VAPT operations, red teaming assessments, and mentoring team members. Coordinating internal and external team efforts on security projects.</p>
+            <div class="project-tech">
+                <span>Red Team</span>
+                <span>VAPT</span>
+                <span>Leadership</span>
+                <span>AD</span>
+                <span>API</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <p class="project-label">// Dec 2022 - Mar 2025</p>
+            <h3>Information Security Engineer</h3>
+            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Veilron Technologies (Hybrid)</p>
+            <p>Vulnerability Assessment and Penetration Testing across Network, Web, Mobile, Active Directory, and API. Red Teaming assessments, configuration reviews, reporting, and project management.</p>
+            <div class="project-tech">
+                <span>VAPT</span>
+                <span>Red Team</span>
+                <span>Config Review</span>
+                <span>Reporting</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <p class="project-label">// Apr 2022 - Nov 2022</p>
+            <h3>IT Security</h3>
+            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Foreign Trade Bank of Cambodia (Full-time, Onsite)</p>
+            <p>Security training awareness, SIEM administration, vulnerability assessments, privilege access control (PAM), and asset management.</p>
+            <div class="project-tech">
+                <span>VA</span>
+                <span>SIEM</span>
+                <span>PAM</span>
+                <span>Asset Mgmt</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <p class="project-label">// Aug 2021 - Nov 2021</p>
+            <h3>IT Support Technician</h3>
+            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Women's Media Centre of Cambodia (Full-time, Onsite)</p>
+            <p>Provided general IT support, maintained reliable network connections, managed mail systems, and assisted with IT policy implementation.</p>
+            <div class="project-tech">
+                <span>IT Support</span>
+                <span>Networking</span>
+                <span>IT Policy</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+    <div class="section-header">
+        <h2><span>#</span> Contact</h2>
+        <div class="line"></div>
+    </div>
+    <div class="contact-content">
+        <p>Interested in working together or have a security concern? Feel free to reach out. I'm always open to discussing new opportunities, collaborations, or security challenges.</p>
+        <div class="contact-links">
+            <a href="https://github.com/Leng-Phirun" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://app.hackthebox.com/users/887881" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M11.996 0a1.119 1.119 0 00-.057.003 1.174 1.174 0 00-.578.197L1.29 6.39A1.174 1.174 0 00.72 7.39v9.22c0 .412.22.794.57.998l10.07 6.19a1.174 1.174 0 001.286 0l10.07-6.19c.35-.204.57-.586.57-.998V7.39c0-.412-.22-.794-.57-.998L12.645.2a1.174 1.174 0 00-.649-.2zm.004 2.432l8.288 5.088v3.076L15.163 7.75a1.174 1.174 0 00-1.216 0l-5.12 3.143V7.748L12 5.89l-.004-3.458zm-3.17 7.456l3.17 1.946 3.17-1.946 5.118 3.14-3.17 1.948-5.118-3.14-5.12 3.14-3.17-1.948 5.12-3.14zm-5.118 4.088l3.17 1.946v3.892l-3.17-1.946v-3.892zm13.406 0v3.892l-3.17 1.946v-3.892l3.17-1.946zm-8.288 2.57v3.458L12 18.11l3.17 1.894v-3.458l5.118-3.14v3.892L12 23.488l-8.288-6.19v-3.892l5.118 3.14z"/></svg>
+                HackTheBox
+            </a>
+            <a href="https://tryhackme.com/p/aries1629" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291a4.525 4.525 0 00-4.33 4.518c0 2.478 1.988 4.497 4.46 4.519h1.552v-2.141H4.5c-1.313 0-2.319-1.1-2.319-2.378 0-1.279 1.006-2.339 2.319-2.339h.705V6.466c0-.063.002-.126.004-.189.138-2.168 1.942-3.878 4.15-3.878 2.296 0 4.166 1.834 4.166 4.067v2.065h.672c1.314 0 2.32 1.06 2.32 2.339 0 1.278-1.006 2.378-2.32 2.378h-1.53v2.141h1.548c2.473-.022 4.462-2.04 4.462-4.519 0-2.07-1.416-3.823-3.337-4.363C15.122 2.776 13.17.517 10.705 0zm3.392 12.472l-4.062 4.326 1.522 1.47 1.49-1.588V24h2.1v-7.32l1.49 1.588 1.521-1.47z"/></svg>
+                TryHackMe
+            </a>
+            <a href="https://www.linkedin.com/in/leng-phirun-b5199522a" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a href="mailto:phirunleng0@gmail.com" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Leng Phirun // Built with purpose</p>
+</footer>
+
+</body>
+</html>
