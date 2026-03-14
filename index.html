@@ -1,3 +1,808 @@
-Hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phirun Leng | Penetration Tester</title>
+    <link rel="icon" href="5845cd430b2a3b54fdbaecf8.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<div class="tenor-gif-embed" data-postid="14259975201363044523" data-share-method="host" data-aspect-ratio="1.02532" data-width="100%"><a href="https://tenor.com/view/cat-white-white-cat-zesty-cat-freaky-cat-gif-14259975201363044523">Cat White Meme</a>from <a href="https://tenor.com/search/cat-memes">Cat Memes</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #161616;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --accent-glow: rgba(0, 255, 136, 0.15);
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --border: #222222;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        nav .logo span {
+            color: var(--text-secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Hamburger menu for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .greeting {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero .title {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .title span {
+            color: var(--accent);
+        }
+
+        .hero .tagline {
+            font-family: 'Courier New', monospace;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent);
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent-dim);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h2 span {
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+        }
+
+        .section-header .line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .about-details {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .about-details .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .about-details .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .about-details .detail-label {
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .about-details .detail-value {
+            color: var(--accent);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            color: var(--text-primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Certifications */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .cert-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .cert-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-card .cert-org {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cert-card .cert-status {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cert-status.earned {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .cert-status.in-progress {
+            background: rgba(255, 200, 0, 0.1);
+            color: #ffc800;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 30px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .project-card .project-label {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tech span {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* Contact */
+        #contact {
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .contact-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Terminal cursor blink */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: var(--accent);
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .title {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="logo">~/phirun<span>.leng</span></a>
+        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certs</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <p class="greeting">$ whoami</p>
+        <h1>Phirun Leng</h1>
+        <p class="title"><span>Penetration Tester</span> &amp; Security Researcher</p>
+        <p class="tagline">Identifying vulnerabilities before the adversaries do. Passionate about offensive security, red teaming, and making systems more resilient.<span class="cursor"></span></p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Get In Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <div class="section-header">
+        <h2><span>#</span> About Me</h2>
+        <div class="line"></div>
+    </div>
+    <div class="about-content">
+        <div class="about-text">
+            <p>I am a penetration tester with a passion for breaking into systems to make them stronger. My work focuses on identifying security weaknesses in networks, web applications, and infrastructure before malicious actors can exploit them.</p>
+            <p>I approach security with an attacker's mindset and a defender's purpose -- every vulnerability found is an opportunity to improve an organization's security posture.</p>
+            <p>When I'm not testing systems, I enjoy participating in CTF competitions, researching new attack techniques, and contributing to the security community.</p>
+        </div>
+        <div class="about-details">
+            <div class="detail-item">
+                <span class="detail-label">role</span>
+                <span class="detail-value">Penetration Tester</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">focus</span>
+                <span class="detail-value">Offensive Security</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">interests</span>
+                <span class="detail-value">Red Teaming, CTFs</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">location</span>
+                <span class="detail-value">Available Remote</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+    <div class="section-header">
+        <h2><span>#</span> Skills</h2>
+        <div class="line"></div>
+    </div>
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h3>// Penetration Testing</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Web App Testing</span>
+                <span class="skill-tag">Network Pentesting</span>
+                <span class="skill-tag">API Security</span>
+                <span class="skill-tag">Mobile App Testing</span>
+                <span class="skill-tag">Active Directory</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Tools &amp; Frameworks</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Burp Suite</span>
+                <span class="skill-tag">Metasploit</span>
+                <span class="skill-tag">Nmap</span>
+                <span class="skill-tag">Wireshark</span>
+                <span class="skill-tag">Cobalt Strike</span>
+                <span class="skill-tag">BloodHound</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Programming</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Bash</span>
+                <span class="skill-tag">PowerShell</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">JavaScript</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Platforms &amp; OS</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Kali Linux</span>
+                <span class="skill-tag">Windows Server</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Active Directory</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Methodologies</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">OWASP Top 10</span>
+                <span class="skill-tag">MITRE ATT&amp;CK</span>
+                <span class="skill-tag">PTES</span>
+                <span class="skill-tag">NIST</span>
+                <span class="skill-tag">Kill Chain</span>
+            </div>
+        </div>
+        <div class="skill-card">
+            <h3>// Reporting</h3>
+            <div class="skill-tags">
+                <span class="skill-tag">Technical Writing</span>
+                <span class="skill-tag">Risk Assessment</span>
+                <span class="skill-tag">CVSS Scoring</span>
+                <span class="skill-tag">Remediation Guidance</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications -->
+<section id="certifications">
+    <div class="section-header">
+        <h2><span>#</span> Certifications</h2>
+        <div class="line"></div>
+    </div>
+    <div class="certs-grid">
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f6e1;</div>
+            <h3>OSCP</h3>
+            <p class="cert-org">Offensive Security</p>
+            <span class="cert-status in-progress">// update status</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f50d;</div>
+            <h3>CEH</h3>
+            <p class="cert-org">EC-Council</p>
+            <span class="cert-status in-progress">// update status</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f4bb;</div>
+            <h3>CompTIA Security+</h3>
+            <p class="cert-org">CompTIA</p>
+            <span class="cert-status in-progress">// update status</span>
+        </div>
+        <div class="cert-card">
+            <div class="cert-icon">&#x1f310;</div>
+            <h3>eJPT</h3>
+            <p class="cert-org">INE Security</p>
+            <span class="cert-status in-progress">// update status</span>
+        </div>
+    </div>
+    <p style="text-align: center; color: var(--text-secondary); margin-top: 1.5rem; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+        // Update certification statuses with your actual credentials
+    </p>
+</section>
+
+<!-- Projects -->
+<section id="projects">
+    <div class="section-header">
+        <h2><span>#</span> Projects</h2>
+        <div class="line"></div>
+    </div>
+    <div class="projects-grid">
+        <div class="project-card">
+            <p class="project-label">// 01</p>
+            <h3>Vulnerability Scanner</h3>
+            <p>Custom automated vulnerability scanner built to identify common web application security flaws including SQLi, XSS, and misconfigurations.</p>
+            <div class="project-tech">
+                <span>Python</span>
+                <span>Requests</span>
+                <span>BeautifulSoup</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <p class="project-label">// 02</p>
+            <h3>CTF Writeups</h3>
+            <p>Collection of detailed writeups from capture-the-flag competitions documenting exploitation techniques and problem-solving approaches.</p>
+            <div class="project-tech">
+                <span>Reverse Engineering</span>
+                <span>Pwn</span>
+                <span>Web</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <p class="project-label">// 03</p>
+            <h3>Network Recon Toolkit</h3>
+            <p>A suite of bash and Python scripts for automating the reconnaissance phase of penetration testing engagements.</p>
+            <div class="project-tech">
+                <span>Bash</span>
+                <span>Python</span>
+                <span>Nmap</span>
+            </div>
+        </div>
+    </div>
+    <p style="text-align: center; color: var(--text-secondary); margin-top: 1.5rem; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+        // Replace with your actual projects and link to GitHub repos
+    </p>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+    <div class="section-header">
+        <h2><span>#</span> Contact</h2>
+        <div class="line"></div>
+    </div>
+    <div class="contact-content">
+        <p>Interested in working together or have a security concern? Feel free to reach out. I'm always open to discussing new opportunities, collaborations, or security challenges.</p>
+        <div class="contact-links">
+            <a href="https://github.com/Leng-Phirun" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="https://linkedin.com/in/" class="contact-link" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a href="mailto:your.email@example.com" class="contact-link">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2026 Phirun Leng // Built with purpose</p>
+</footer>
+
+</body>
+</html>
