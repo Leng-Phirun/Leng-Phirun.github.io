@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +22,20 @@
             --text-primary: #e0e0e0;
             --text-secondary: #888888;
             --border: #222222;
+            --nav-bg: rgba(10, 10, 10, 0.95);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #e8e8e8;
+            --bg-card: #ffffff;
+            --accent: #00875a;
+            --accent-dim: #006644;
+            --accent-glow: rgba(0, 135, 90, 0.12);
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --border: #ddd;
+            --nav-bg: rgba(245, 245, 245, 0.95);
         }
 
         html {
@@ -33,18 +47,86 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Navigation */
+        /* ===== Loading Screen ===== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-terminal {
+            font-family: 'Courier New', monospace;
+            color: #00ff88;
+            font-size: 0.9rem;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .loader-line {
+            opacity: 0;
+            margin-bottom: 0.4rem;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .loader-line.visible {
+            opacity: 1;
+        }
+
+        .loader-line .prompt {
+            color: #888;
+        }
+
+        .loader-line .success {
+            color: #00ff88;
+        }
+
+        .loader-line .info {
+            color: #e0e0e0;
+        }
+
+        .loader-progress {
+            margin-top: 1rem;
+            height: 3px;
+            background: #222;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #00ff88;
+            transition: width 0.3s;
+        }
+
+        /* ===== Navigation ===== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
             padding: 1rem 2rem;
+            transition: background 0.3s;
         }
 
         nav .nav-inner {
@@ -67,6 +149,12 @@
             color: var(--text-secondary);
         }
 
+        nav .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -85,7 +173,39 @@
             color: var(--accent);
         }
 
-        /* Hamburger menu for mobile */
+        /* Theme toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            width: 16px;
+            height: 16px;
+        }
+
+        [data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="light"] .theme-toggle .icon-moon { display: inline; }
+
+        /* Hamburger */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -100,7 +220,41 @@
             transition: 0.3s;
         }
 
-        /* Hero Section */
+        /* ===== Scroll Animations ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== Hero Section ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -115,13 +269,10 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background:
-                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 255, 136, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -205,7 +356,7 @@
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Sections */
+        /* ===== Sections ===== */
         section {
             padding: 5rem 2rem;
             max-width: 1100px;
@@ -234,7 +385,7 @@
             margin-top: 0.5rem;
         }
 
-        /* About */
+        /* ===== About ===== */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -253,6 +404,7 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 2rem;
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .about-details .detail-item {
@@ -276,7 +428,7 @@
             color: var(--accent);
         }
 
-        /* Skills */
+        /* ===== Skills ===== */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -311,7 +463,7 @@
         }
 
         .skill-tag {
-            background: rgba(0, 255, 136, 0.08);
+            background: var(--accent-glow);
             border: 1px solid rgba(0, 255, 136, 0.2);
             color: var(--text-primary);
             padding: 0.35rem 0.75rem;
@@ -320,7 +472,11 @@
             font-family: 'Courier New', monospace;
         }
 
-        /* Certifications */
+        [data-theme="light"] .skill-tag {
+            border-color: rgba(0, 135, 90, 0.3);
+        }
+
+        /* ===== Certifications ===== */
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -367,25 +523,131 @@
         }
 
         .cert-status.earned {
-            background: rgba(0, 255, 136, 0.1);
+            background: var(--accent-glow);
             color: var(--accent);
             border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
-        .cert-status.in-progress {
-            background: rgba(255, 200, 0, 0.1);
-            color: #ffc800;
-            border: 1px solid rgba(255, 200, 0, 0.3);
+        [data-theme="light"] .cert-status.earned {
+            border-color: rgba(0, 135, 90, 0.4);
         }
 
-        /* Projects */
-        .projects-grid {
+        /* ===== Experience Timeline ===== */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.6rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent);
+            z-index: 1;
+            transition: background 0.3s;
+        }
+
+        .timeline-item:first-child::before {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -2.1rem;
+            top: 0.5rem;
+            width: 2px;
+            height: 0;
+        }
+
+        .timeline-date {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .timeline-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-card .company {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-tech span {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            transition: background 0.3s;
+        }
+
+        /* ===== CTF & Projects ===== */
+        .ctf-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
 
-        .project-card {
+        .ctf-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -393,46 +655,80 @@
             transition: all 0.3s;
         }
 
-        .project-card:hover {
+        .ctf-card:hover {
             border-color: var(--accent-dim);
             box-shadow: 0 0 30px var(--accent-glow);
             transform: translateY(-2px);
         }
 
-        .project-card .project-label {
+        .ctf-card .ctf-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .ctf-card .ctf-icon {
+            font-size: 2rem;
+        }
+
+        .ctf-card .ctf-title h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .ctf-card .ctf-title .ctf-platform {
             font-family: 'Courier New', monospace;
             color: var(--accent);
             font-size: 0.8rem;
-            margin-bottom: 0.5rem;
         }
 
-        .project-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .project-card p {
+        .ctf-card p {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        .ctf-card .ctf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            transition: opacity 0.3s;
         }
 
-        .project-tech span {
+        .ctf-card .ctf-link:hover {
+            opacity: 0.7;
+        }
+
+        .ctf-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ctf-stat {
+            text-align: center;
+        }
+
+        .ctf-stat .stat-value {
             font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .ctf-stat .stat-label {
             font-size: 0.75rem;
             color: var(--text-secondary);
-            background: var(--bg-secondary);
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
+            font-family: 'Courier New', monospace;
         }
 
-        /* Contact */
+        /* ===== Contact ===== */
         #contact {
             border-top: 1px solid var(--border);
         }
@@ -481,7 +777,7 @@
             fill: currentColor;
         }
 
-        /* Footer */
+        /* ===== Footer ===== */
         footer {
             text-align: center;
             padding: 2rem;
@@ -506,7 +802,7 @@
             50% { opacity: 0; }
         }
 
-        /* Responsive */
+        /* ===== Responsive ===== */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -518,7 +814,7 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: rgba(10, 10, 10, 0.98);
+                background: var(--nav-bg);
                 flex-direction: column;
                 padding: 1rem 2rem;
                 gap: 1rem;
@@ -542,12 +838,16 @@
             }
 
             .skills-grid,
-            .projects-grid {
+            .ctf-grid {
                 grid-template-columns: 1fr;
             }
 
             .certs-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .timeline {
+                padding-left: 2rem;
             }
         }
 
@@ -560,20 +860,41 @@
 </head>
 <body>
 
+<!-- Loading Screen -->
+<div class="loader" id="loader">
+    <div class="loader-terminal">
+        <div class="loader-line" id="line1"><span class="prompt">root@phirun:~$</span> <span class="info">initializing portfolio...</span></div>
+        <div class="loader-line" id="line2"><span class="success">[+]</span> <span class="info">Loading modules: VAPT, Red Team, OSCP</span></div>
+        <div class="loader-line" id="line3"><span class="success">[+]</span> <span class="info">Connecting to HackTheBox... OK</span></div>
+        <div class="loader-line" id="line4"><span class="success">[+]</span> <span class="info">Connecting to TryHackMe... OK</span></div>
+        <div class="loader-line" id="line5"><span class="success">[+]</span> <span class="info">System ready. Welcome back, Phirun.</span></div>
+        <div class="loader-progress">
+            <div class="loader-progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+</div>
+
 <!-- Navigation -->
 <nav>
     <div class="nav-inner">
         <a href="#" class="logo">~/leng<span>.phirun</span></a>
-        <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
-            <span></span><span></span><span></span>
+        <div class="nav-right">
+            <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+                <span></span><span></span><span></span>
+            </div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certs</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#ctf">CTF</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            </button>
         </div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#certifications">Certs</a></li>
-            <li><a href="#projects">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
     </div>
 </nav>
 
@@ -585,7 +906,7 @@
         <p class="title"><span>Assistant Lead (Adversary)</span> &amp; Penetration Tester</p>
         <p class="tagline">An enthusiastic cybersecurity professional with hands-on experience in vulnerability assessment, penetration testing, and red teaming. Passionate about uncovering vulnerabilities and strengthening security measures.<span class="cursor"></span></p>
         <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">View Experience</a>
+            <a href="#experience" class="btn btn-primary">View Experience</a>
             <a href="#contact" class="btn btn-outline">Get In Touch</a>
         </div>
     </div>
@@ -593,17 +914,17 @@
 
 <!-- About -->
 <section id="about">
-    <div class="section-header">
+    <div class="section-header fade-in">
         <h2><span>#</span> About Me</h2>
         <div class="line"></div>
     </div>
     <div class="about-content">
-        <div class="about-text">
+        <div class="about-text fade-in-left">
             <p>I am an Assistant Lead (Adversary) at Veilron Technologies with over 3 years of hands-on experience in the cybersecurity field. My work focuses on vulnerability assessment, penetration testing, and red teaming across networks, web applications, mobile apps, Active Directory, and APIs.</p>
             <p>I'm passionate about uncovering vulnerabilities and strengthening security measures, with a keen interest in staying updated with the latest industry trends. Known for a proactive attitude, attention to detail, and the ability to collaborate effectively with teams.</p>
             <p>Outside of work, I enjoy participating in CTF competitions, researching new tools and techniques, and continuously growing within the cybersecurity landscape.</p>
         </div>
-        <div class="about-details">
+        <div class="about-details fade-in-right">
             <div class="detail-item">
                 <span class="detail-label">role</span>
                 <span class="detail-value">Asst. Lead (Adversary)</span>
@@ -634,12 +955,12 @@
 
 <!-- Skills -->
 <section id="skills">
-    <div class="section-header">
+    <div class="section-header fade-in">
         <h2><span>#</span> Skills</h2>
         <div class="line"></div>
     </div>
     <div class="skills-grid">
-        <div class="skill-card">
+        <div class="skill-card fade-in">
             <h3>// VAPT &amp; Red Teaming</h3>
             <div class="skill-tags">
                 <span class="skill-tag">Network Pentesting</span>
@@ -651,7 +972,7 @@
                 <span class="skill-tag">Configuration Review</span>
             </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card fade-in">
             <h3>// Security Operations</h3>
             <div class="skill-tags">
                 <span class="skill-tag">Vulnerability Assessment</span>
@@ -661,7 +982,7 @@
                 <span class="skill-tag">IT Policy</span>
             </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card fade-in">
             <h3>// Key Competencies</h3>
             <div class="skill-tags">
                 <span class="skill-tag">Project Management</span>
@@ -671,7 +992,7 @@
                 <span class="skill-tag">Client Presentations</span>
             </div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card fade-in">
             <h3>// Methodologies</h3>
             <div class="skill-tags">
                 <span class="skill-tag">OWASP Top 10</span>
@@ -686,54 +1007,54 @@
 
 <!-- Certifications -->
 <section id="certifications">
-    <div class="section-header">
+    <div class="section-header fade-in">
         <h2><span>#</span> Certifications</h2>
         <div class="line"></div>
     </div>
     <div class="certs-grid">
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f6e1;</div>
             <h3>OSCP</h3>
             <p class="cert-org">OffSec</p>
             <span class="cert-status earned">Certified</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f3af;</div>
             <h3>CRTA</h3>
             <p class="cert-org">CyberWarFare Labs</p>
             <span class="cert-status earned">Nov 2025</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f50d;</div>
             <h3>CREST CRT</h3>
             <p class="cert-org">CREST</p>
             <span class="cert-status earned">Aug 2025</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f50d;</div>
             <h3>CREST CPSA</h3>
             <p class="cert-org">CREST</p>
             <span class="cert-status earned">Aug 2025</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f4bb;</div>
             <h3>PT1 Certificate</h3>
             <p class="cert-org">TryHackMe</p>
             <span class="cert-status earned">Jun 2025</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f310;</div>
             <h3>API Pentesting</h3>
             <p class="cert-org">APIsec University</p>
             <span class="cert-status earned">Oct 2024</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f512;</div>
             <h3>CC</h3>
             <p class="cert-org">ISC2</p>
             <span class="cert-status earned">Certified</span>
         </div>
-        <div class="cert-card">
+        <div class="cert-card fade-in">
             <div class="cert-icon">&#x1f393;</div>
             <h3>B.Sc. Computer Science</h3>
             <p class="cert-org">Royal University of Phnom Penh</p>
@@ -742,71 +1063,122 @@
     </div>
 </section>
 
-<!-- Experience -->
-<section id="projects">
-    <div class="section-header">
+<!-- Experience Timeline -->
+<section id="experience">
+    <div class="section-header fade-in">
         <h2><span>#</span> Experience</h2>
         <div class="line"></div>
     </div>
-    <div class="projects-grid">
-        <div class="project-card">
-            <p class="project-label">// Mar 2025 - Present</p>
-            <h3>Assistant Lead (Adversary)</h3>
-            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Veilron Technologies (Hybrid)</p>
-            <p>Leading adversary simulation engagements, overseeing VAPT operations, red teaming assessments, and mentoring team members. Coordinating internal and external team efforts on security projects.</p>
-            <div class="project-tech">
-                <span>Red Team</span>
-                <span>VAPT</span>
-                <span>Leadership</span>
-                <span>AD</span>
-                <span>API</span>
+    <div class="timeline">
+        <div class="timeline-item fade-in-left">
+            <div class="timeline-date">Mar 2025 - Present</div>
+            <div class="timeline-card">
+                <h3>Assistant Lead (Adversary)</h3>
+                <p class="company">Veilron Technologies // Hybrid, Phnom Penh</p>
+                <p>Leading adversary simulation engagements, overseeing VAPT operations, red teaming assessments, and mentoring team members. Coordinating internal and external team efforts on security projects.</p>
+                <div class="timeline-tech">
+                    <span>Red Team</span>
+                    <span>VAPT</span>
+                    <span>Leadership</span>
+                    <span>AD</span>
+                    <span>API</span>
+                </div>
             </div>
         </div>
-        <div class="project-card">
-            <p class="project-label">// Dec 2022 - Mar 2025</p>
-            <h3>Information Security Engineer</h3>
-            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Veilron Technologies (Hybrid)</p>
-            <p>Vulnerability Assessment and Penetration Testing across Network, Web, Mobile, Active Directory, and API. Red Teaming assessments, configuration reviews, reporting, and project management.</p>
-            <div class="project-tech">
-                <span>VAPT</span>
-                <span>Red Team</span>
-                <span>Config Review</span>
-                <span>Reporting</span>
+        <div class="timeline-item fade-in-left">
+            <div class="timeline-date">Dec 2022 - Mar 2025</div>
+            <div class="timeline-card">
+                <h3>Information Security Engineer</h3>
+                <p class="company">Veilron Technologies // Hybrid, Phnom Penh</p>
+                <p>Vulnerability Assessment and Penetration Testing across Network, Web, Mobile, Active Directory, and API. Red Teaming assessments, configuration reviews, reporting, and project management.</p>
+                <div class="timeline-tech">
+                    <span>VAPT</span>
+                    <span>Red Team</span>
+                    <span>Config Review</span>
+                    <span>Reporting</span>
+                </div>
             </div>
         </div>
-        <div class="project-card">
-            <p class="project-label">// Apr 2022 - Nov 2022</p>
-            <h3>IT Security</h3>
-            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Foreign Trade Bank of Cambodia (Full-time, Onsite)</p>
-            <p>Security training awareness, SIEM administration, vulnerability assessments, privilege access control (PAM), and asset management.</p>
-            <div class="project-tech">
-                <span>VA</span>
-                <span>SIEM</span>
-                <span>PAM</span>
-                <span>Asset Mgmt</span>
+        <div class="timeline-item fade-in-left">
+            <div class="timeline-date">Apr 2022 - Nov 2022</div>
+            <div class="timeline-card">
+                <h3>IT Security</h3>
+                <p class="company">Foreign Trade Bank of Cambodia // Full-time, Onsite</p>
+                <p>Security training awareness, SIEM administration, vulnerability assessments, privilege access control (PAM), and asset management.</p>
+                <div class="timeline-tech">
+                    <span>VA</span>
+                    <span>SIEM</span>
+                    <span>PAM</span>
+                    <span>Asset Mgmt</span>
+                </div>
             </div>
         </div>
-        <div class="project-card">
-            <p class="project-label">// Aug 2021 - Nov 2021</p>
-            <h3>IT Support Technician</h3>
-            <p style="color: var(--accent); margin-bottom: 0.5rem; font-size: 0.85rem; font-family: 'Courier New', monospace;">Women's Media Centre of Cambodia (Full-time, Onsite)</p>
-            <p>Provided general IT support, maintained reliable network connections, managed mail systems, and assisted with IT policy implementation.</p>
-            <div class="project-tech">
-                <span>IT Support</span>
-                <span>Networking</span>
-                <span>IT Policy</span>
+        <div class="timeline-item fade-in-left">
+            <div class="timeline-date">Aug 2021 - Nov 2021</div>
+            <div class="timeline-card">
+                <h3>IT Support Technician</h3>
+                <p class="company">Women's Media Centre of Cambodia // Full-time, Onsite</p>
+                <p>Provided general IT support, maintained reliable network connections, managed mail systems, and assisted with IT policy implementation.</p>
+                <div class="timeline-tech">
+                    <span>IT Support</span>
+                    <span>Networking</span>
+                    <span>IT Policy</span>
+                </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTF & Security Projects -->
+<section id="ctf">
+    <div class="section-header fade-in">
+        <h2><span>#</span> CTF &amp; Security Labs</h2>
+        <div class="line"></div>
+    </div>
+    <div class="ctf-grid">
+        <div class="ctf-card fade-in">
+            <div class="ctf-header">
+                <span class="ctf-icon">&#x1f4e6;</span>
+                <div class="ctf-title">
+                    <h3>HackTheBox</h3>
+                    <span class="ctf-platform">app.hackthebox.com</span>
+                </div>
+            </div>
+            <p>Active member on HackTheBox, tackling machines and challenges across various difficulty levels. Practicing real-world offensive techniques in a controlled lab environment.</p>
+            <a href="https://app.hackthebox.com/users/887881" class="ctf-link" target="_blank" rel="noopener">View Profile &rarr;</a>
+        </div>
+        <div class="ctf-card fade-in">
+            <div class="ctf-header">
+                <span class="ctf-icon">&#x1f6a9;</span>
+                <div class="ctf-title">
+                    <h3>TryHackMe</h3>
+                    <span class="ctf-platform">tryhackme.com</span>
+                </div>
+            </div>
+            <p>Completed learning paths and challenges on TryHackMe, earning the PT1 Certificate. Focused on penetration testing, privilege escalation, and web exploitation techniques.</p>
+            <a href="https://tryhackme.com/p/aries1629" class="ctf-link" target="_blank" rel="noopener">View Profile &rarr;</a>
+        </div>
+        <div class="ctf-card fade-in">
+            <div class="ctf-header">
+                <span class="ctf-icon">&#x1f3c6;</span>
+                <div class="ctf-title">
+                    <h3>CTF Competitions</h3>
+                    <span class="ctf-platform">Capture The Flag</span>
+                </div>
+            </div>
+            <p>Regular CTF participant with experience in web exploitation, reverse engineering, cryptography, and binary exploitation challenges. Continuously sharpening offensive skills through competition.</p>
+            <a href="https://github.com/Leng-Phirun" class="ctf-link" target="_blank" rel="noopener">GitHub &rarr;</a>
         </div>
     </div>
 </section>
 
 <!-- Contact -->
 <section id="contact">
-    <div class="section-header">
+    <div class="section-header fade-in">
         <h2><span>#</span> Contact</h2>
         <div class="line"></div>
     </div>
-    <div class="contact-content">
+    <div class="contact-content fade-in">
         <p>Interested in working together or have a security concern? Feel free to reach out. I'm always open to discussing new opportunities, collaborations, or security challenges.</p>
         <div class="contact-links">
             <a href="https://github.com/Leng-Phirun" class="contact-link" target="_blank" rel="noopener">
@@ -837,6 +1209,68 @@
 <footer>
     <p>&copy; 2026 Leng Phirun // Built with purpose</p>
 </footer>
+
+<script>
+    // ===== Loading Screen =====
+    (function() {
+        const lines = document.querySelectorAll('.loader-line');
+        const progressBar = document.getElementById('progressBar');
+        const loader = document.getElementById('loader');
+        const delays = [200, 600, 1000, 1400, 1800];
+        const progress = [20, 40, 60, 80, 100];
+
+        delays.forEach((delay, i) => {
+            setTimeout(() => {
+                lines[i].classList.add('visible');
+                progressBar.style.width = progress[i] + '%';
+            }, delay);
+        });
+
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 2400);
+    })();
+
+    // ===== Scroll Animations =====
+    (function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const siblings = el.parentElement.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
+                    let delay = 0;
+                    siblings.forEach((sib, i) => {
+                        if (sib === el) delay = i * 100;
+                    });
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, Math.min(delay, 400));
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+            observer.observe(el);
+        });
+    })();
+
+    // ===== Theme Toggle =====
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    }
+
+    (function() {
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            document.documentElement.setAttribute('data-theme', saved);
+        }
+    })();
+</script>
 
 </body>
 </html>
