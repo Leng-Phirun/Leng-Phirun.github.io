@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leng Phirun</title>
     <link rel="icon" href="5845cd430b2a3b54fdbaecf8.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -33,7 +36,7 @@
             --accent-dim: #006644;
             --accent-glow: rgba(0, 135, 90, 0.12);
             --text-primary: #1a1a1a;
-            --text-secondary: #555555;
+            --text-secondary: #444444;
             --border: #ddd;
             --nav-bg: rgba(245, 245, 245, 0.95);
         }
@@ -43,11 +46,56 @@
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             transition: background 0.3s, color 0.3s;
+        }
+
+        /* ===== Focus & Accessibility ===== */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        /* Skip navigation */
+        .skip-nav {
+            position: absolute;
+            top: -100%;
+            left: 1rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 0.5rem 1rem;
+            z-index: 10000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .skip-nav:focus {
+            top: 0;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html { scroll-behavior: auto; }
+            .fade-in, .fade-in-left, .fade-in-right {
+                opacity: 1;
+                transform: none;
+            }
         }
 
         /* ===== Loading Screen ===== */
@@ -57,7 +105,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #0a0a0a;
+            background: var(--bg-primary);
             z-index: 9999;
             display: flex;
             align-items: center;
@@ -71,7 +119,7 @@
         }
 
         .loader-terminal {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: #00ff88;
             font-size: 0.9rem;
             max-width: 500px;
@@ -142,7 +190,7 @@
             font-weight: 700;
             color: var(--accent);
             text-decoration: none;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         nav .logo span {
@@ -166,7 +214,7 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         nav ul li a:hover {
@@ -181,7 +229,7 @@
             cursor: pointer;
             padding: 0.4rem 0.6rem;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             transition: all 0.3s;
             display: flex;
@@ -211,6 +259,9 @@
             flex-direction: column;
             cursor: pointer;
             gap: 5px;
+            background: none;
+            border: none;
+            padding: 0.4rem;
         }
 
         .hamburger span {
@@ -218,6 +269,7 @@
             height: 2px;
             background: var(--accent);
             transition: 0.3s;
+            display: block;
         }
 
         /* ===== Scroll Animations ===== */
@@ -282,7 +334,7 @@
         }
 
         .hero .greeting {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--accent);
             font-size: 1rem;
             margin-bottom: 1rem;
@@ -294,6 +346,10 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero .title {
@@ -308,7 +364,7 @@
         }
 
         .hero .tagline {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--text-secondary);
             font-size: 0.95rem;
             max-width: 550px;
@@ -326,7 +382,7 @@
             padding: 0.75rem 2rem;
             border-radius: 4px;
             text-decoration: none;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             transition: all 0.3s;
             cursor: pointer;
@@ -375,14 +431,15 @@
 
         .section-header h2 span {
             color: var(--accent);
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .section-header .line {
             width: 60px;
             height: 3px;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--accent-dim));
             margin-top: 0.5rem;
+            border-radius: 2px;
         }
 
         /* ===== About ===== */
@@ -402,9 +459,14 @@
         .about-details {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 2rem;
             transition: background 0.3s, border-color 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .about-details {
+            background: rgba(22, 22, 22, 0.7);
         }
 
         .about-details .detail-item {
@@ -421,7 +483,7 @@
 
         .about-details .detail-label {
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .about-details .detail-value {
@@ -438,20 +500,43 @@
         .skill-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 2rem;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .skill-card {
+            background: rgba(22, 22, 22, 0.7);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
         }
 
         .skill-card:hover {
             border-color: var(--accent-dim);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-4px);
         }
 
         .skill-card h3 {
             color: var(--accent);
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1rem;
             margin-bottom: 1rem;
         }
@@ -469,7 +554,7 @@
             padding: 0.35rem 0.75rem;
             border-radius: 3px;
             font-size: 0.8rem;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         [data-theme="light"] .skill-tag {
@@ -486,15 +571,21 @@
         .cert-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .cert-card {
+            background: rgba(22, 22, 22, 0.7);
         }
 
         .cert-card:hover {
             border-color: var(--accent-dim);
-            box-shadow: 0 0 30px var(--accent-glow);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-3px);
         }
 
         .cert-icon {
@@ -510,7 +601,7 @@
         .cert-card .cert-org {
             color: var(--text-secondary);
             font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .cert-card .cert-status {
@@ -519,7 +610,7 @@
             padding: 0.25rem 0.75rem;
             border-radius: 3px;
             font-size: 0.75rem;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .cert-status.earned {
@@ -587,7 +678,7 @@
         }
 
         .timeline-date {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--accent);
             font-size: 0.8rem;
             margin-bottom: 0.25rem;
@@ -596,14 +687,19 @@
         .timeline-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .timeline-card {
+            background: rgba(22, 22, 22, 0.7);
         }
 
         .timeline-card:hover {
             border-color: var(--accent-dim);
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 8px 32px var(--accent-glow);
         }
 
         .timeline-card h3 {
@@ -614,7 +710,7 @@
         .timeline-card .company {
             color: var(--accent);
             font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             margin-bottom: 0.75rem;
         }
 
@@ -631,7 +727,7 @@
         }
 
         .timeline-tech span {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
             color: var(--text-secondary);
             background: var(--bg-secondary);
@@ -650,15 +746,20 @@
         .ctf-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 2rem;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] .ctf-card {
+            background: rgba(22, 22, 22, 0.7);
         }
 
         .ctf-card:hover {
             border-color: var(--accent-dim);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-4px);
         }
 
         .ctf-card .ctf-header {
@@ -678,7 +779,7 @@
         }
 
         .ctf-card .ctf-title .ctf-platform {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--accent);
             font-size: 0.8rem;
         }
@@ -695,7 +796,7 @@
             gap: 0.4rem;
             color: var(--accent);
             text-decoration: none;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
             transition: opacity 0.3s;
         }
@@ -715,7 +816,7 @@
         }
 
         .ctf-stat .stat-value {
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent);
@@ -725,7 +826,7 @@
         .ctf-stat .stat-label {
             font-size: 0.75rem;
             color: var(--text-secondary);
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* ===== Contact ===== */
@@ -757,18 +858,20 @@
             gap: 0.5rem;
             color: var(--text-primary);
             text-decoration: none;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             padding: 0.75rem 1.5rem;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 8px;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
 
         .contact-link:hover {
             border-color: var(--accent);
             color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-2px);
         }
 
         .contact-link svg {
@@ -782,7 +885,7 @@
             text-align: center;
             padding: 2rem;
             border-top: 1px solid var(--border);
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
             color: var(--text-secondary);
         }
@@ -825,6 +928,107 @@
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
+        }
+
+        /* ===== Projects ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .project-card {
+            background: rgba(22, 22, 22, 0.7);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-dim);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-4px);
+        }
+
+        .project-card .project-type {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            background: var(--accent-glow);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            transition: opacity 0.3s;
+        }
+
+        .project-link:hover {
+            opacity: 0.7;
         }
 
         /* Terminal cursor blink */
@@ -878,7 +1082,8 @@
             }
 
             .skills-grid,
-            .ctf-grid {
+            .ctf-grid,
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -900,6 +1105,8 @@
 </head>
 <body>
 
+<a href="#about" class="skip-nav">Skip to main content</a>
+
 <!-- Loading Screen -->
 <div class="loader" id="loader">
     <div class="loader-terminal">
@@ -919,18 +1126,19 @@
     <div class="nav-inner">
         <a href="#" class="logo">~/leng<span>.phirun</span></a>
         <div class="nav-right">
-            <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
                 <span></span><span></span><span></span>
-            </div>
-            <ul>
+            </button>
+            <ul id="navMenu" role="navigation">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#certifications">Certs</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#ctf">CTF</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                 <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
             </button>
@@ -938,6 +1146,7 @@
     </div>
 </nav>
 
+<main>
 <!-- Hero -->
 <section class="hero">
     <div class="hero-content">
@@ -1169,6 +1378,52 @@
     </div>
 </section>
 
+<!-- Projects & Writeups -->
+<section id="projects">
+    <div class="section-header fade-in">
+        <h2><span>#</span> Projects &amp; Writeups</h2>
+        <div class="line"></div>
+    </div>
+    <div class="projects-grid">
+        <div class="project-card fade-in">
+            <span class="project-type">Tool</span>
+            <h3>Internal Network Pentest Toolkit</h3>
+            <p>Custom scripts and automation tools developed for internal network penetration testing engagements, including AD enumeration, lateral movement helpers, and post-exploitation utilities.</p>
+            <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">PowerShell</span>
+                <span class="project-tag">Active Directory</span>
+                <span class="project-tag">Red Team</span>
+            </div>
+            <a href="https://github.com/Leng-Phirun" class="project-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+        </div>
+        <div class="project-card fade-in">
+            <span class="project-type">Writeup</span>
+            <h3>HackTheBox Machine Writeups</h3>
+            <p>Detailed writeups covering exploitation methodology, privilege escalation techniques, and lessons learned from various HackTheBox machines across different difficulty levels.</p>
+            <div class="project-tags">
+                <span class="project-tag">OSCP Prep</span>
+                <span class="project-tag">Linux</span>
+                <span class="project-tag">Windows</span>
+                <span class="project-tag">Pivoting</span>
+            </div>
+            <a href="https://app.hackthebox.com/users/887881" class="project-link" target="_blank" rel="noopener">View Profile &rarr;</a>
+        </div>
+        <div class="project-card fade-in">
+            <span class="project-type">Research</span>
+            <h3>Web Application Security Research</h3>
+            <p>Ongoing research into modern web application vulnerabilities including authentication bypasses, API security flaws, and emerging attack vectors against cloud-native applications.</p>
+            <div class="project-tags">
+                <span class="project-tag">OWASP</span>
+                <span class="project-tag">API Security</span>
+                <span class="project-tag">Bug Bounty</span>
+                <span class="project-tag">Cloud</span>
+            </div>
+            <a href="https://github.com/Leng-Phirun" class="project-link" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+        </div>
+    </div>
+</section>
+
 <!-- CTF & Security Projects -->
 <section id="ctf">
     <div class="section-header fade-in">
@@ -1221,32 +1476,34 @@
     <div class="contact-content fade-in">
         <p>Interested in working together or have a security concern? Feel free to reach out. I'm always open to discussing new opportunities, collaborations, or security challenges.</p>
         <div class="contact-links">
-            <a href="https://github.com/Leng-Phirun" class="contact-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <a href="https://github.com/Leng-Phirun" class="contact-link" target="_blank" rel="noopener" aria-label="GitHub profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 GitHub
             </a>
-            <a href="https://app.hackthebox.com/users/887881" class="contact-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M11.996 0a1.119 1.119 0 00-.057.003 1.174 1.174 0 00-.578.197L1.29 6.39A1.174 1.174 0 00.72 7.39v9.22c0 .412.22.794.57.998l10.07 6.19a1.174 1.174 0 001.286 0l10.07-6.19c.35-.204.57-.586.57-.998V7.39c0-.412-.22-.794-.57-.998L12.645.2a1.174 1.174 0 00-.649-.2zm.004 2.432l8.288 5.088v3.076L15.163 7.75a1.174 1.174 0 00-1.216 0l-5.12 3.143V7.748L12 5.89l-.004-3.458zm-3.17 7.456l3.17 1.946 3.17-1.946 5.118 3.14-3.17 1.948-5.118-3.14-5.12 3.14-3.17-1.948 5.12-3.14zm-5.118 4.088l3.17 1.946v3.892l-3.17-1.946v-3.892zm13.406 0v3.892l-3.17 1.946v-3.892l3.17-1.946zm-8.288 2.57v3.458L12 18.11l3.17 1.894v-3.458l5.118-3.14v3.892L12 23.488l-8.288-6.19v-3.892l5.118 3.14z"/></svg>
+            <a href="https://app.hackthebox.com/users/887881" class="contact-link" target="_blank" rel="noopener" aria-label="HackTheBox profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.996 0a1.119 1.119 0 00-.057.003 1.174 1.174 0 00-.578.197L1.29 6.39A1.174 1.174 0 00.72 7.39v9.22c0 .412.22.794.57.998l10.07 6.19a1.174 1.174 0 001.286 0l10.07-6.19c.35-.204.57-.586.57-.998V7.39c0-.412-.22-.794-.57-.998L12.645.2a1.174 1.174 0 00-.649-.2zm.004 2.432l8.288 5.088v3.076L15.163 7.75a1.174 1.174 0 00-1.216 0l-5.12 3.143V7.748L12 5.89l-.004-3.458zm-3.17 7.456l3.17 1.946 3.17-1.946 5.118 3.14-3.17 1.948-5.118-3.14-5.12 3.14-3.17-1.948 5.12-3.14zm-5.118 4.088l3.17 1.946v3.892l-3.17-1.946v-3.892zm13.406 0v3.892l-3.17 1.946v-3.892l3.17-1.946zm-8.288 2.57v3.458L12 18.11l3.17 1.894v-3.458l5.118-3.14v3.892L12 23.488l-8.288-6.19v-3.892l5.118 3.14z"/></svg>
                 HackTheBox
             </a>
-            <a href="https://tryhackme.com/p/aries1629" class="contact-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291a4.525 4.525 0 00-4.33 4.518c0 2.478 1.988 4.497 4.46 4.519h1.552v-2.141H4.5c-1.313 0-2.319-1.1-2.319-2.378 0-1.279 1.006-2.339 2.319-2.339h.705V6.466c0-.063.002-.126.004-.189.138-2.168 1.942-3.878 4.15-3.878 2.296 0 4.166 1.834 4.166 4.067v2.065h.672c1.314 0 2.32 1.06 2.32 2.339 0 1.278-1.006 2.378-2.32 2.378h-1.53v2.141h1.548c2.473-.022 4.462-2.04 4.462-4.519 0-2.07-1.416-3.823-3.337-4.363C15.122 2.776 13.17.517 10.705 0zm3.392 12.472l-4.062 4.326 1.522 1.47 1.49-1.588V24h2.1v-7.32l1.49 1.588 1.521-1.47z"/></svg>
+            <a href="https://tryhackme.com/p/aries1629" class="contact-link" target="_blank" rel="noopener" aria-label="TryHackMe profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.705 0C7.54 0 4.902 2.285 4.349 5.291a4.525 4.525 0 00-4.33 4.518c0 2.478 1.988 4.497 4.46 4.519h1.552v-2.141H4.5c-1.313 0-2.319-1.1-2.319-2.378 0-1.279 1.006-2.339 2.319-2.339h.705V6.466c0-.063.002-.126.004-.189.138-2.168 1.942-3.878 4.15-3.878 2.296 0 4.166 1.834 4.166 4.067v2.065h.672c1.314 0 2.32 1.06 2.32 2.339 0 1.278-1.006 2.378-2.32 2.378h-1.53v2.141h1.548c2.473-.022 4.462-2.04 4.462-4.519 0-2.07-1.416-3.823-3.337-4.363C15.122 2.776 13.17.517 10.705 0zm3.392 12.472l-4.062 4.326 1.522 1.47 1.49-1.588V24h2.1v-7.32l1.49 1.588 1.521-1.47z"/></svg>
                 TryHackMe
             </a>
-            <a href="https://www.linkedin.com/in/leng-phirun-b5199522a" class="contact-link" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <a href="https://www.linkedin.com/in/leng-phirun-b5199522a" class="contact-link" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 LinkedIn
             </a>
-            <a href="mailto:phirunleng0@gmail.com" class="contact-link">
-                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="mailto:phirunleng0@gmail.com" class="contact-link" aria-label="Send email">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                 Email
             </a>
         </div>
     </div>
 </section>
 
+</main>
+
 <!-- Back to Top -->
-<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
@@ -1256,8 +1513,12 @@
 </footer>
 
 <script>
-    // ===== Loading Screen =====
     (function() {
+        // ===== Theme (apply early to avoid flash) =====
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+        // ===== Loading Screen =====
         const lines = document.querySelectorAll('.loader-line');
         const progressBar = document.getElementById('progressBar');
         const loader = document.getElementById('loader');
@@ -1271,15 +1532,44 @@
             }, delay);
         });
 
-        setTimeout(() => {
-            loader.classList.add('hidden');
-        }, 2400);
-    })();
+        setTimeout(() => loader.classList.add('hidden'), 2400);
 
-    // ===== Scroll Animations =====
-    (function() {
+        // ===== Hamburger Menu =====
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = navMenu.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close menu when clicking a nav link
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                navMenu.classList.remove('open');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // ===== Theme Toggle =====
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const html = document.documentElement;
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+
+        // ===== Scroll Animations =====
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
                     const siblings = el.parentElement.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
@@ -1287,9 +1577,7 @@
                     siblings.forEach((sib, i) => {
                         if (sib === el) delay = i * 100;
                     });
-                    setTimeout(() => {
-                        el.classList.add('visible');
-                    }, Math.min(delay, 400));
+                    setTimeout(() => el.classList.add('visible'), Math.min(delay, 400));
                     observer.unobserve(el);
                 }
             });
@@ -1298,34 +1586,16 @@
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
             observer.observe(el);
         });
-    })();
 
-    // ===== Back to Top =====
-    (function() {
-        const btn = document.getElementById('backToTop');
+        // ===== Back to Top =====
+        const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                btn.classList.add('visible');
-            } else {
-                btn.classList.remove('visible');
-            }
+            backToTop.classList.toggle('visible', window.scrollY > 400);
         });
-    })();
 
-    // ===== Theme Toggle =====
-    function toggleTheme() {
-        const html = document.documentElement;
-        const current = html.getAttribute('data-theme');
-        const next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-    }
-
-    (function() {
-        const saved = localStorage.getItem('theme');
-        if (saved) {
-            document.documentElement.setAttribute('data-theme', saved);
-        }
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     })();
 </script>
 
