@@ -137,8 +137,19 @@
             font-family: var(--font-mono);
             color: var(--term-success);
             font-size: var(--fs-md);
-            max-width: 500px;
+            max-width: 560px;
             width: 90%;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .loader-ascii {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-size: 0.62rem;
+            line-height: 1.05;
+            margin-bottom: 1.25rem;
+            opacity: 0.75;
+            white-space: pre;
         }
 
         .loader-line {
@@ -150,6 +161,12 @@
 
         .loader-line.visible {
             opacity: 1;
+            animation: ds-typein 0.7s steps(40) forwards;
+        }
+
+        @keyframes ds-typein {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         .loader-line .prompt {
@@ -175,7 +192,8 @@
         .loader-progress-bar {
             height: 100%;
             width: 0%;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+            box-shadow: 0 0 10px var(--accent-glow);
             transition: width var(--dur-fast);
         }
 
@@ -493,10 +511,39 @@
         .section-header .line {
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+            background: linear-gradient(90deg, var(--accent), transparent);
             margin-top: 0.5rem;
             border-radius: 2px;
         }
+
+        .section-header.visible .line {
+            animation: ds-line-grow 1.2s ease-out;
+        }
+
+        @keyframes ds-line-grow {
+            from { width: 0; }
+            to { width: 60px; }
+        }
+
+        /* Button shine sweep (design-system motif) */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before { left: 100%; }
 
         /* ===== About ===== */
         .about-content {
@@ -536,6 +583,11 @@
         .about-details .detail-label {
             color: var(--text-secondary);
             font-family: 'JetBrains Mono', monospace;
+        }
+
+        .about-details .detail-label::before {
+            content: '> ';
+            color: var(--accent);
         }
 
         .about-details .detail-value {
@@ -697,7 +749,29 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: var(--border);
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 16px var(--accent);
+            animation: ds-slide-dot 4s ease-in-out infinite;
+        }
+
+        @keyframes ds-slide-dot {
+            0%, 100% { top: 0; }
+            50% { top: calc(100% - 8px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .timeline::after { animation: none; }
         }
 
         .timeline-item {
@@ -948,6 +1022,24 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
             color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        footer .bracket {
+            color: var(--accent);
+        }
+
+        footer .divider {
+            opacity: 0.4;
+        }
+
+        footer .uptime b {
+            color: var(--accent);
+            font-weight: 500;
         }
 
         /* Back to top button */
@@ -1080,11 +1172,11 @@
             text-decoration: none;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.85rem;
-            transition: opacity 0.3s;
+            transition: letter-spacing 0.3s, opacity 0.3s;
         }
 
         .project-link:hover {
-            opacity: 0.7;
+            letter-spacing: 1px;
         }
 
         /* Terminal cursor blink */
@@ -1166,10 +1258,15 @@
 <!-- Loading Screen -->
 <div class="loader" id="loader">
     <div class="loader-terminal">
-        <div class="loader-line" id="line1"><span class="prompt">root@phirun:~$</span> <span class="info">initializing portfolio...</span></div>
-        <div class="loader-line" id="line2"><span class="success">[+]</span> <span class="info">Loading modules: VAPT, Red Team, OSCP</span></div>
-        <div class="loader-line" id="line3"><span class="success">[+]</span> <span class="info">Connecting to HackTheBox... OK</span></div>
-        <div class="loader-line" id="line4"><span class="success">[+]</span> <span class="info">Connecting to TryHackMe... OK</span></div>
+        <pre class="loader-ascii" aria-hidden="true"> ____  _   _ ___ ____  _   _ _   _
+|  _ \| | | |_ _|  _ \| | | | \ | |
+| |_) | |_| || || |_) | | | |  \| |
+|  __/|  _  || ||  _ &lt;| |_| | |\  |
+|_|   |_| |_|___|_| \_\\___/|_| \_|</pre>
+        <div class="loader-line" id="line1"><span class="prompt">root@phirun:~$</span> <span class="info">./boot.sh</span></div>
+        <div class="loader-line" id="line2"><span class="success">[+]</span> <span class="info">Loading modules: VAPT · RedTeam · OSCP</span></div>
+        <div class="loader-line" id="line3"><span class="success">[+]</span> <span class="info">Establishing C2 channel... <span class="success">ok</span></span></div>
+        <div class="loader-line" id="line4"><span class="success">[+]</span> <span class="info">Fingerprinting target... <span class="success">done</span></span></div>
         <div class="loader-line" id="line5"><span class="success">[+]</span> <span class="info">System ready. Welcome back, Phirun.</span></div>
         <div class="loader-progress">
             <div class="loader-progress-bar" id="progressBar"></div>
@@ -1566,7 +1663,11 @@
 
 <!-- Footer -->
 <footer>
-    <p>&copy; 2026 Leng Phirun // Built with purpose</p>
+    <span><span class="bracket">&lt;</span> coded with passion <span class="bracket">/&gt;</span></span>
+    <span class="divider">·</span>
+    <span>&copy; 2026 Leng Phirun</span>
+    <span class="divider">·</span>
+    <span class="uptime">uptime: <b>99.9%</b></span>
 </footer>
 
 <script>
