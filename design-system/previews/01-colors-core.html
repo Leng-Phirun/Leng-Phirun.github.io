@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors — Core palette</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body { margin:0; background:#0a0a0a; font-family:'JetBrains Mono',monospace; color:#e0e0e0; }
+  .wrap { padding:20px; display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; }
+  .sw { display:flex; flex-direction:column; gap:4px; }
+  .chip { height:70px; border-radius:4px; border:1px solid #222; }
+  .name { font-size:11px; color:#e0e0e0; }
+  .val  { font-size:10px; color:#888; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sw"><div class="chip" style="background:#0a0a0a"></div><div class="name">bg-primary</div><div class="val">#0a0a0a</div></div>
+  <div class="sw"><div class="chip" style="background:#111111"></div><div class="name">bg-secondary</div><div class="val">#111111</div></div>
+  <div class="sw"><div class="chip" style="background:#161616"></div><div class="name">bg-card</div><div class="val">#161616</div></div>
+  <div class="sw"><div class="chip" style="background:#222222"></div><div class="name">border</div><div class="val">#222222</div></div>
+  <div class="sw"><div class="chip" style="background:#00ff88;border-color:#00ff88"></div><div class="name" style="color:#00ff88">accent</div><div class="val">#00ff88</div></div>
+</div>
+</body>
+</html>

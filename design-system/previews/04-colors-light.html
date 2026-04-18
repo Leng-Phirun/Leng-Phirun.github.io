@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors — Light theme</title>
+<style>
+  html,body { margin:0; background:#f5f5f5; font-family:'JetBrains Mono',monospace; color:#1a1a1a; }
+  .wrap { padding:20px; display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; }
+  .sw { display:flex; flex-direction:column; gap:4px; }
+  .chip { height:70px; border-radius:4px; border:1px solid #ddd; }
+  .name { font-size:11px; color:#1a1a1a; }
+  .val  { font-size:10px; color:#444; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sw"><div class="chip" style="background:#f5f5f5"></div><div class="name">bg-primary</div><div class="val">#f5f5f5</div></div>
+  <div class="sw"><div class="chip" style="background:#e8e8e8"></div><div class="name">bg-secondary</div><div class="val">#e8e8e8</div></div>
+  <div class="sw"><div class="chip" style="background:#ffffff"></div><div class="name">bg-card</div><div class="val">#ffffff</div></div>
+  <div class="sw"><div class="chip" style="background:#00875a;border-color:#00875a"></div><div class="name" style="color:#00875a">accent</div><div class="val">#00875a</div></div>
+  <div class="sw"><div class="chip" style="background:#006644;border-color:#006644"></div><div class="name" style="color:#006644">accent-dim</div><div class="val">#006644</div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Timeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'Inter',sans-serif;color:#e0e0e0}
+.wrap{padding:24px 36px}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;background:#222}
+.item{position:relative;margin-bottom:18px;padding-left:18px}
+.item::before{content:'';position:absolute;left:-38px;top:6px;width:12px;height:12px;border-radius:50%;background:#0a0a0a;border:2px solid #00ff88}
+.item.active::before{background:#00ff88;box-shadow:0 0 10px rgba(0,255,136,0.4)}
+.date{font-family:'JetBrains Mono',monospace;color:#00ff88;font-size:11px;margin-bottom:4px}
+.card{background:rgba(22,22,22,0.7);border:1px solid #222;border-radius:12px;padding:14px 16px}
+.card h3{margin:0 0 4px;font-size:15px;font-weight:600}
+.card .co{font-family:'JetBrains Mono',monospace;color:#00ff88;font-size:11px}
+</style></head><body><div class="wrap">
+<div class="timeline">
+  <div class="item active">
+    <div class="date">Mar 2025 - Present</div>
+    <div class="card"><h3>Assistant Lead (Adversary)</h3><div class="co">Veilron Technologies // Hybrid, Phnom Penh</div></div>
+  </div>
+  <div class="item">
+    <div class="date">Dec 2022 - Mar 2025</div>
+    <div class="card"><h3>Information Security Engineer</h3><div class="co">Veilron Technologies</div></div>
+  </div>
+</div>
+</div></body></html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Buttons</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'JetBrains Mono',monospace;color:#e0e0e0}
+.wrap{padding:28px 24px;display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:12px;align-items:center}
+.btn{padding:12px 32px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:14px;cursor:pointer;transition:all .3s;text-decoration:none}
+.btn-primary{background:#00ff88;color:#0a0a0a;border:1px solid #00ff88;font-weight:700}
+.btn-primary.hover{background:transparent;color:#00ff88;box-shadow:0 0 20px rgba(0,255,136,0.15)}
+.btn-outline{background:transparent;color:#00ff88;border:1px solid #00cc6a}
+.btn-outline.hover{background:rgba(0,255,136,0.15);box-shadow:0 0 20px rgba(0,255,136,0.15)}
+.lbl{font-size:10px;color:#888;min-width:80px}
+</style></head><body><div class="wrap">
+<div class="row"><span class="lbl">primary</span><a class="btn btn-primary">View Experience</a><a class="btn btn-primary hover">View Experience</a></div>
+<div class="row"><span class="lbl">outline</span><a class="btn btn-outline">Get In Touch</a><a class="btn btn-outline hover">Get In Touch</a></div>
+<div class="row"><span class="lbl">&nbsp;</span><span style="font-size:10px;color:#666">default &middot; hover</span></div>
+</div></body></html>

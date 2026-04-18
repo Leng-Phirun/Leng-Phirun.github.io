@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phirun Cybersec — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden}
+
+/* CRT scanlines (subtle) */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  background:repeating-linear-gradient(0deg,rgba(0,255,136,0.025) 0 1px,transparent 1px 3px);
+  mix-blend-mode:overlay}
+
+/* Matrix rain */
+#matrix{position:fixed;inset:0;z-index:0;opacity:.16;pointer-events:none}
+
+main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:4rem 2rem 6rem}
+
+.eyebrow{font-family:var(--font-mono);color:var(--accent);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1rem}
+.eyebrow::before{content:'$ ';opacity:.6}
+
+h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:700;letter-spacing:-2px;line-height:1.05;margin-bottom:1.25rem}
+h1 .accent{background:linear-gradient(135deg,var(--text-primary) 0%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{color:var(--text-secondary);font-size:1.05rem;max-width:640px;line-height:1.7;margin-bottom:2.5rem}
+
+.meta{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:4rem;padding:1rem 1.25rem;border:1px solid var(--border);border-radius:var(--r-lg);background:rgba(22,22,22,0.6);backdrop-filter:blur(8px);font-family:var(--font-mono);font-size:.78rem}
+.meta span{color:var(--text-secondary)}
+.meta b{color:var(--accent);font-weight:500}
+
+h2{font-size:1.6rem;font-weight:700;margin:3rem 0 .5rem;display:flex;align-items:center;gap:.5rem}
+h2 .hash{color:var(--accent);font-family:var(--font-mono)}
+.section-desc{color:var(--text-secondary);margin-bottom:1.5rem;font-size:.9rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;margin-bottom:3rem}
+.card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--bg-card);transition:transform .25s,border-color .25s,box-shadow .25s;text-decoration:none;color:inherit;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 8px 32px var(--accent-glow)}
+.card iframe{width:100%;border:0;pointer-events:none;display:block;background:#0a0a0a}
+.card .foot{padding:.75rem 1rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.7rem}
+.card .foot .name{color:var(--text-primary)}
+.card .foot .num{color:var(--accent);opacity:.7}
+
+.big-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:4rem}
+.big-link{border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;text-decoration:none;color:inherit;background:var(--bg-card);display:flex;flex-direction:column;gap:.5rem;transition:all .25s;position:relative;overflow:hidden}
+.big-link:hover{border-color:var(--accent);box-shadow:0 8px 32px var(--accent-glow)}
+.big-link::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);transform:scaleY(0);transform-origin:top;transition:transform .3s}
+.big-link:hover::before{transform:scaleY(1)}
+.big-link h3{font-size:1.05rem;font-weight:600;display:flex;align-items:center;gap:.5rem}
+.big-link h3 .arrow{color:var(--accent);transition:transform .25s}
+.big-link:hover h3 .arrow{transform:translateX(4px)}
+.big-link p{color:var(--text-secondary);font-size:.85rem;line-height:1.6}
+.big-link .tag{font-family:var(--font-mono);font-size:.7rem;color:var(--accent);margin-top:.25rem;opacity:.75}
+
+footer{margin-top:5rem;padding-top:2rem;border-top:1px solid var(--border);color:var(--text-secondary);font-family:var(--font-mono);font-size:.75rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<canvas id="matrix"></canvas>
+
+<main>
+  <p class="eyebrow">cat design-system.md</p>
+  <h1>Phirun Cybersec<br><span class="accent">Design System</span></h1>
+  <p class="lede">Terminal-native design language for offensive-security portfolios. Phosphor-green accents on near-black, CRT scanlines, katakana rain, glitch and scramble motion. Built from the Leng-Phirun.github.io codebase.</p>
+
+  <div class="meta">
+    <span>version <b>1.0</b></span>
+    <span>updated <b>Apr 2026</b></span>
+    <span>tokens <b>CSS variables</b></span>
+    <span>components <b>22</b></span>
+    <span>license <b>see LICENSE</b></span>
+  </div>
+
+  <div class="big-links">
+    <a href="ui-kit.html" class="big-link">
+      <div class="tag">&gt; live demo</div>
+      <h3>Portfolio UI Kit <span class="arrow">→</span></h3>
+      <p>Full hacker-edition portfolio page with matrix rain, glitch typography, scanlines, and a Tweaks panel to toggle accent and effects live.</p>
+    </a>
+    <a href="tokens.css" class="big-link">
+      <div class="tag">&gt; drop-in</div>
+      <h3>tokens.css <span class="arrow">→</span></h3>
+      <p>All colors, type, spacing, radii, shadows, and gradients as CSS custom properties. Link once and use <code style="color:var(--accent);font-family:var(--font-mono)">var(--accent)</code> anywhere.</p>
+    </a>
+    <a href="assets/icons/" class="big-link">
+      <div class="tag">&gt; svg</div>
+      <h3>Iconography <span class="arrow">→</span></h3>
+      <p>Brand marks (GitHub · HackTheBox · TryHackMe), UI icons (sun · moon · arrow-up), and 7 Lucide category icons for certifications.</p>
+    </a>
+  </div>
+
+  <h2><span class="hash">#</span> Colors</h2>
+  <p class="section-desc">Core surfaces, accents, text, and the light-theme override. Includes an alternate "Dim" accent variant for long-form reading.</p>
+  <div class="grid" id="grid-colors"></div>
+
+  <h2><span class="hash">#</span> Type</h2>
+  <p class="section-desc">Inter for body + display, JetBrains Mono for terminal moments. Full scale from 0.7rem to 3.5rem hero.</p>
+  <div class="grid" id="grid-type"></div>
+
+  <h2><span class="hash">#</span> Spacing &amp; Surfaces</h2>
+  <p class="section-desc">Spacing scale, border radii, and the three-tier shadow system (card-hover, btn-glow, float).</p>
+  <div class="grid" id="grid-spacing"></div>
+
+  <h2><span class="hash">#</span> Components</h2>
+  <p class="section-desc">Buttons, chips, cards, pills, timeline, section headers, nav, and the terminal loader — ready-to-copy markup.</p>
+  <div class="grid" id="grid-components"></div>
+
+  <h2><span class="hash">#</span> Brand</h2>
+  <p class="section-desc">Logo lockup, iconography, background treatments, and the optional matrix-rain motif.</p>
+  <div class="grid" id="grid-brand"></div>
+
+  <footer>
+    <span>Phirun Cybersec Design System — <a href="https://github.com/Leng-Phirun/Leng-Phirun.github.io">source on GitHub</a></span>
+    <span>&gt; <span style="color:var(--accent)">stay sharp</span>_</span>
+  </footer>
+</main>
+
+<script>
+/* ===== Matrix rain ===== */
+const cv=document.getElementById('matrix'),ctx=cv.getContext('2d');
+function fit(){cv.width=innerWidth;cv.height=innerHeight}
+fit();addEventListener('resize',fit);
+const chars='アイウエオカキクケコサシスセソ0123456789abcdef';
+const fs=14;let drops=Array(Math.ceil(innerWidth/fs)).fill(1);
+function frame(){
+  ctx.fillStyle='rgba(10,10,10,0.08)';ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.font=fs+"px 'JetBrains Mono',monospace";
+  for(let i=0;i<drops.length;i++){
+    const ch=chars[Math.floor(Math.random()*chars.length)];
+    const y=drops[i]*fs;
+    ctx.fillStyle=y<30?'#ccffdd':'#00ff88';ctx.globalAlpha=.6;
+    ctx.fillText(ch,i*fs,y);
+    if(y>cv.height&&Math.random()>.975)drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(frame,55);
+
+/* ===== Preview card data ===== */
+const CARDS = {
+  colors: [
+    ['01-colors-core.html',       'Core surfaces',          200],
+    ['02-colors-accent.html',     'Accent — Phosphor',      220],
+    ['02b-colors-accent-dim.html','Accent — Dim variant',   220],
+    ['03-colors-text.html',       'Text & border',          200],
+    ['04-colors-light.html',      'Light theme',            220],
+  ],
+  type: [
+    ['05-type-display.html',      'Display — hero',         260],
+    ['06-type-headings.html',     'Headings',               260],
+    ['07-type-body.html',         'Body & mono',            240],
+    ['08-type-scale.html',        'Type scale',             280],
+  ],
+  spacing: [
+    ['09-spacing-scale.html',     'Spacing scale',          240],
+    ['10-radius.html',            'Border radii',           200],
+    ['11-shadows.html',           'Shadows & glow',         220],
+  ],
+  components: [
+    ['12-buttons.html',           'Buttons',                200],
+    ['13-chips.html',             'Chips & tags',           200],
+    ['14-card.html',              'Card',                   260],
+    ['15-pills-links.html',       'Contact pills',          200],
+    ['16-timeline.html',          'Timeline',               300],
+    ['17-section-header.html',    'Section header',         180],
+    ['18-nav.html',               'Navigation',             180],
+    ['20-terminal.html',          'Terminal loader',        260],
+  ],
+  brand: [
+    ['19-logo.html',              'Logo & lockup',          200],
+    ['21-iconography.html',       'Iconography',            230],
+    ['22-background.html',        'Background treatments',  260],
+    ['23-matrix-rain.html',       'Matrix rain motif',      260],
+  ],
+};
+
+function renderGrid(id, rows, startNum){
+  const grid = document.getElementById('grid-'+id);
+  rows.forEach(([file, name, h], i) => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = 'previews/' + file;
+    a.target = '_blank';
+    a.innerHTML = `
+      <iframe src="previews/${file}" loading="lazy" style="height:${h}px"></iframe>
+      <div class="foot"><span class="name">${name}</span><span class="num">${String(startNum + i).padStart(2,'0')}</span></div>`;
+    grid.appendChild(a);
+  });
+}
+let n = 1;
+renderGrid('colors',     CARDS.colors,     n); n += CARDS.colors.length;
+renderGrid('type',       CARDS.type,       n); n += CARDS.type.length;
+renderGrid('spacing',    CARDS.spacing,    n); n += CARDS.spacing.length;
+renderGrid('components', CARDS.components, n); n += CARDS.components.length;
+renderGrid('brand',      CARDS.brand,      n);
+</script>
+</body>
+</html>

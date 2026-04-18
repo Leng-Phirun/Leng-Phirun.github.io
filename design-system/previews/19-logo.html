@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'JetBrains Mono',monospace;color:#e0e0e0}
+.wrap{padding:32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:center}
+.cell{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.logo{font-weight:700}
+.logo.sm{font-size:14px}
+.logo.md{font-size:20px}
+.logo.lg{font-size:28px}
+.logo .a{color:#00ff88}
+.logo .b{color:#888}
+.cap{font-size:10px;color:#666}
+.onlight{background:#f5f5f5;padding:20px;border-radius:8px}
+.onlight .logo .a{color:#00875a}
+.onlight .logo .b{color:#444}
+</style></head><body><div class="wrap">
+<div class="cell"><span class="logo sm"><span class="a">~/leng</span><span class="b">.phirun</span></span><div class="cap">small · 14px · nav</div></div>
+<div class="cell"><span class="logo md"><span class="a">~/leng</span><span class="b">.phirun</span></span><div class="cap">medium · 20px</div></div>
+<div class="cell"><span class="logo lg"><span class="a">~/leng</span><span class="b">.phirun</span></span><div class="cap">large · 28px · footer</div></div>
+<div class="cell" style="grid-column:1/-1"><div class="onlight"><span class="logo md"><span class="a">~/leng</span><span class="b">.phirun</span></span></div><div class="cap">on light surface</div></div>
+</div></body></html>

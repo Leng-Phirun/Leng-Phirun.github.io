@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Nav</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'JetBrains Mono',monospace;color:#e0e0e0;min-height:100vh}
+.stripe{height:160px;background:
+  radial-gradient(ellipse at 20% 50%, rgba(0,255,136,0.12) 0%, transparent 55%),
+  radial-gradient(ellipse at 80% 50%, rgba(0,255,136,0.05) 0%, transparent 55%);
+}
+nav{position:absolute;top:0;left:0;right:0;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #222;padding:16px 28px}
+.inner{max-width:100%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:16px;font-weight:700;color:#00ff88;text-decoration:none}
+.logo span{color:#888}
+ul{list-style:none;padding:0;margin:0;display:flex;gap:24px}
+a.item{color:#888;text-decoration:none;font-size:13px;transition:color .3s}
+a.item.active{color:#00ff88}
+.tog{border:1px solid #222;color:#888;padding:6px 10px;border-radius:4px;font-size:12px;display:inline-flex;align-items:center;gap:6px}
+</style></head><body>
+<nav><div class="inner">
+  <a class="logo" href="#">~/leng<span>.phirun</span></a>
+  <ul>
+    <li><a class="item">About</a></li>
+    <li><a class="item">Skills</a></li>
+    <li><a class="item active">Certs</a></li>
+    <li><a class="item">Experience</a></li>
+    <li><a class="item">Projects</a></li>
+    <li><a class="item">Contact</a></li>
+  </ul>
+  <button class="tog">☀ dark</button>
+</div></nav>
+<div class="stripe"></div>
+</body></html>

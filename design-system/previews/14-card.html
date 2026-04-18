@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Cards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'Inter',sans-serif;color:#e0e0e0}
+.wrap{padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:rgba(22,22,22,0.7);border:1px solid #222;border-radius:12px;padding:20px;backdrop-filter:blur(10px);position:relative;overflow:hidden}
+.card.hover{border-color:#00cc6a;box-shadow:0 8px 32px rgba(0,255,136,0.15);transform:translateY(-4px)}
+.card.hover::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#00ff88,transparent)}
+.h{font-family:'JetBrains Mono',monospace;font-size:15px;color:#00ff88;margin:0 0 10px}
+.p{font-size:13px;color:#888;margin:0;line-height:1.5}
+.state{font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin-top:10px}
+</style></head><body><div class="wrap">
+<div class="card">
+  <h3 class="h">// Default</h3>
+  <p class="p">Hairline border, optional glass fill, 12px radius.</p>
+  <div class="state">default</div>
+</div>
+<div class="card hover">
+  <h3 class="h">// Hover</h3>
+  <p class="p">Border → accent-dim, lift 4px, soft green glow, top sweep line.</p>
+  <div class="state">:hover</div>
+</div>
+</div></body></html>

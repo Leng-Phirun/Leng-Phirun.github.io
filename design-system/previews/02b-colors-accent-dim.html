@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Accent — Dim</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#0a0a0a;font-family:'JetBrains Mono',monospace;color:#e0e0e0}
+.wrap{padding:20px 24px;display:flex;flex-direction:column;gap:10px}
+.head{font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.sw{border:1px solid #222;border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.chip{width:100%;height:48px;border-radius:6px;margin-bottom:8px}
+.name{font-size:11px;font-weight:700}
+.hex{font-size:10px;color:#888}
+.var{font-size:9px;color:#666}
+.note{margin-top:8px;font-size:10px;color:#888;line-height:1.6}
+.note b{color:#00cc6a}
+</style></head><body><div class="wrap">
+<div class="head">Accent — Dim variant (alt theme)</div>
+<div class="row">
+  <div class="sw"><div class="chip" style="background:#00cc6a"></div><span class="name">Primary</span><span class="hex">#00cc6a</span><span class="var">--accent</span></div>
+  <div class="sw"><div class="chip" style="background:#00a357"></div><span class="name">Dim</span><span class="hex">#00a357</span><span class="var">--accent-dim</span></div>
+  <div class="sw"><div class="chip" style="background:rgba(0,204,106,0.15)"></div><span class="name">Glow</span><span class="hex">rgba 0.15</span><span class="var">--accent-glow</span></div>
+</div>
+<div class="note">Softer alternative to <b>#00ff88</b> phosphor. Reduces eye strain on long reading sessions &amp; renders cleaner on OLED. Swap via <code style="background:#111;padding:1px 4px">[data-accent="dim"]</code> attribute.</div>
+</div></body></html>

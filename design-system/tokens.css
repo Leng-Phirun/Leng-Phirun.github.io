@@ -1,0 +1,208 @@
+/* ===========================================================================
+   PHIRUN CYBERSEC — DESIGN TOKENS
+   Source of truth: Leng-Phirun/Leng-Phirun.github.io (index.html :root vars)
+   Vibe: terminal / hacker / phosphor-green on near-black
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  /* -------- Colors — Dark theme (default) -------- */
+  --bg-primary:    #0a0a0a;   /* page background  */
+  --bg-secondary:  #111111;   /* tag chips, nested surfaces */
+  --bg-card:       #161616;   /* card fills (solid) */
+  --bg-card-blur:  rgba(22, 22, 22, 0.7); /* cards with backdrop-filter */
+  --nav-bg:        rgba(10, 10, 10, 0.95);
+
+  --accent:        #00ff88;   /* phosphor green — primary accent  */
+  --accent-dim:    #00cc6a;   /* darker accent, used in gradients & borders */
+  --accent-glow:   rgba(0, 255, 136, 0.15);  /* shadow / halo */
+  --accent-tint:   rgba(0, 255, 136, 0.05);  /* ultra-low overlays */
+  --accent-chip-border: rgba(0, 255, 136, 0.20);
+  --accent-chip-strong: rgba(0, 255, 136, 0.30);
+
+  --text-primary:   #e0e0e0;   /* body copy  */
+  --text-secondary: #888888;   /* meta, captions, labels */
+  --border:         #222222;   /* hairline on cards, nav */
+
+  /* terminal loader palette (explicit greens used on loader) */
+  --term-prompt:  #888888;
+  --term-success: #00ff88;
+  --term-info:    #e0e0e0;
+
+  /* -------- Type families -------- */
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', ui-monospace, Menlo, monospace;
+
+  /* -------- Type scale (from codebase; rem-based, 16px root) -------- */
+  --fs-xs:    0.7rem;    /* tiny uppercase eyebrows, project-type, tech tags */
+  --fs-sm:    0.75rem;   /* cert-status, timeline-tech */
+  --fs-base:  0.85rem;   /* nav links, buttons, link text */
+  --fs-md:    0.9rem;    /* body in cards, nav items */
+  --fs-lg:    1rem;      /* h3 on cards, skill headers */
+  --fs-xl:    1.15rem;   /* timeline h3 */
+  --fs-2xl:   1.4rem;    /* hero title sub, ctf stat-value */
+  --fs-3xl:   2rem;      /* section h2 */
+  --fs-hero:  3.5rem;    /* hero h1 */
+
+  /* -------- Weight -------- */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* -------- Line height -------- */
+  --lh-body: 1.6;
+  --lh-tight: 1.2;
+
+  /* -------- Letter-spacing -------- */
+  --ls-tight: -1px;      /* hero h1 */
+  --ls-wide:  0.5px;     /* eyebrow labels, small caps */
+
+  /* -------- Radius -------- */
+  --r-xs: 2px;
+  --r-sm: 3px;           /* chips, tags, status badges */
+  --r-md: 4px;           /* buttons, theme toggle */
+  --r-lg: 8px;           /* contact-link pills */
+  --r-xl: 12px;          /* cards (default) */
+  --r-pill: 999px;
+
+  /* -------- Spacing (rem) -------- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.5rem;
+  --sp-6:  2rem;
+  --sp-7:  2.5rem;
+  --sp-8:  3rem;
+  --sp-10: 5rem;         /* section vertical padding */
+
+  /* -------- Shadows & glow -------- */
+  --shadow-card-hover: 0 8px 32px var(--accent-glow);
+  --shadow-btn-glow:   0 0 20px var(--accent-glow);
+  --shadow-node-glow:  0 0 10px var(--accent-glow);
+  --shadow-float:      0 0 15px var(--accent-glow);
+
+  /* -------- Motion -------- */
+  --dur-fast:   0.3s;
+  --dur-slow:   0.6s;
+  --ease-out:   ease-out;
+
+  /* -------- Layout -------- */
+  --container-max: 1100px;
+  --nav-height: 64px;
+
+  /* -------- Signature gradients -------- */
+  --grad-hero-text:   linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  --grad-accent-line: linear-gradient(90deg, var(--accent), var(--accent-dim));
+  --grad-accent-fade: linear-gradient(90deg, transparent, var(--accent), transparent);
+  --grad-hero-bg:
+    radial-gradient(ellipse at 20% 50%, var(--accent-glow) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, var(--accent-tint) 0%, transparent 50%);
+}
+
+/* ---------- Accent = "dim" variant (softer phosphor, OLED-friendly) ---------- */
+[data-accent="dim"] {
+  --accent:       #00cc6a;
+  --accent-dim:   #00a357;
+  --accent-glow:  rgba(0, 204, 106, 0.15);
+  --accent-tint:  rgba(0, 204, 106, 0.05);
+  --accent-chip-border: rgba(0, 204, 106, 0.20);
+  --accent-chip-strong: rgba(0, 204, 106, 0.30);
+}
+
+/* ---------- Light theme override ---------- */
+[data-theme="light"] {
+  --bg-primary:   #f5f5f5;
+  --bg-secondary: #e8e8e8;
+  --bg-card:      #ffffff;
+  --bg-card-blur: #ffffff;
+  --nav-bg:       rgba(245, 245, 245, 0.95);
+
+  --accent:       #00875a;
+  --accent-dim:   #006644;
+  --accent-glow:  rgba(0, 135, 90, 0.12);
+  --accent-tint:  rgba(0, 135, 90, 0.04);
+  --accent-chip-border: rgba(0, 135, 90, 0.30);
+  --accent-chip-strong: rgba(0, 135, 90, 0.40);
+
+  --text-primary:   #1a1a1a;
+  --text-secondary: #444444;
+  --border:         #dddddd;
+}
+
+/* =============================================================
+   SEMANTIC CLASSES — wire straight into markup
+   ============================================================= */
+
+.ds-body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  line-height: var(--lh-body);
+}
+
+.ds-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-tight);
+  background: var(--grad-hero-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ds-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+}
+.ds-h2 .hash { color: var(--accent); font-family: var(--font-mono); }
+
+.ds-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+}
+
+.ds-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wide);
+}
+
+.ds-mono        { font-family: var(--font-mono); }
+.ds-mono-dim    { font-family: var(--font-mono); color: var(--text-secondary); }
+.ds-mono-accent { font-family: var(--font-mono); color: var(--accent); }
+
+.ds-body-text   { color: var(--text-secondary); font-size: var(--fs-md); line-height: var(--lh-body); }
+
+.ds-prompt::before {
+  content: '$ ';
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+/* blink cursor — used after hero tagline */
+.ds-cursor {
+  display: inline-block;
+  width: 10px; height: 1.2em;
+  background: var(--accent);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: ds-blink 1s step-end infinite;
+}
+@keyframes ds-blink { 50% { opacity: 0; } }
+
+/* accent underline — section headers */
+.ds-accent-line {
+  width: 60px; height: 3px;
+  background: var(--grad-accent-line);
+  border-radius: 2px;
+}
